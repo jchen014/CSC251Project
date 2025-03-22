@@ -12,6 +12,8 @@ public class PolicyDemo {
         String smokingStatus;
         double height;
         double weight;
+        int smokerCount = 0;
+        int nonSmokerCount = 0;
         
         String fileName = "PolicyInformation.txt";
         
@@ -26,6 +28,13 @@ public class PolicyDemo {
                 smokingStatus = fileScanner.nextLine();
                 height = Double.parseDouble(fileScanner.nextLine());
                 weight = Double.parseDouble(fileScanner.nextLine());
+                
+                // Count smokers and non-smokers
+                if (smokingStatus.equalsIgnoreCase("smoker")) {
+                    smokerCount++;
+                } else {
+                    nonSmokerCount++;
+                }
                 
                 //create a Policy object
                 Policy policy = new Policy(policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight);
@@ -48,6 +57,10 @@ public class PolicyDemo {
                     fileScanner.nextLine();
                 }
             }
+            
+            // Display smoker/non-smoker counts
+            System.out.println("\nNumber of Policyholders that are smokers: " + smokerCount);
+            System.out.println("Number of Policyholders that are non-smokers: " + nonSmokerCount);
         } catch (FileNotFoundException e) {
             System.out.println("Error: File not found.");
         } catch (Exception e) {
